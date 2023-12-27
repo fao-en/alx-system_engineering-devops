@@ -1,0 +1,27 @@
+Infrastructure Description:
+Components:
+Server 1: Load Balancer (HAproxy Cluster)
+
+Purpose: Load balancer distributes incoming traffic across multiple servers for improved performance, scalability, and reliability.
+Cluster Configuration: HAproxy configured as a cluster with redundancy to ensure high availability and fault tolerance.
+Server 2: Web Server
+
+Purpose: Specifically handles HTTP requests from clients (browsers) and serves static content like HTML, CSS, and images.
+Role: Focuses on efficiently delivering content to users, optimizing web page loading, and managing client-server interactions.
+Server 3: Application Server
+
+Purpose: Executes dynamic code, handles application logic, and interacts with databases or other resources as needed.
+Role: Processes business logic, executes scripts, and generates dynamic content based on user requests.
+Server 4: Database Server
+
+Purpose: Stores and manages structured data, allowing the application server to retrieve, modify, or store information.
+Role: Handles data storage, retrieval, and management, ensuring data integrity and availability for the application.
+Specifics Explained:
+Load Balancer:
+Why Add It: Load balancers evenly distribute incoming traffic among multiple servers, enhancing performance by preventing overload on any single server. A cluster setup with HAproxy ensures fault tolerance and continuous availability.
+Web Server vs. Application Server:
+Web Server: Dedicated to serving static content and handling HTTP requests. This separation allows optimized delivery of web resources and efficient handling of client interactions.
+Application Server: Focused on executing dynamic code, processing logic, and interacting with databases or other backend services. This division enables specialized handling of application-specific functionalities.
+Why Split Components into Separate Servers:
+Scalability and Performance: Separating components allows each server to specialize in its role, optimizing resource utilization and scalability. It prevents contention for resources and enables easy scaling of individual components based on demand.
+This setup ensures a structured and specialized handling of different tasks within the infrastructure, promoting efficient resource allocation and streamlined performance for the application.
