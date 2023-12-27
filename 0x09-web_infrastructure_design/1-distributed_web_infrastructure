@@ -1,0 +1,32 @@
+Designing the Three-Server Web Infrastructure for foobar.com:
+Components:
+Server 1: Web Server (Nginx)
+Server 2: Application Server
+Server 3: Database (MySQL)
+Load Balancer (HAproxy): Distributes incoming traffic across the web and application servers.
+Application Files: Contains the codebase for the website.
+Explanation of Added Elements:
+Additional Server (Application Server): Separating the application server from the web server allows for dedicated processing of application logic, improving performance and scalability.
+Load Balancer (HAproxy): Distributes incoming traffic evenly across multiple servers, ensuring high availability, scalability, and even resource utilization.
+Specifics Explained:
+Load Balancer Configuration:
+Distribution Algorithm: Configured with a round-robin distribution algorithm. It routes requests sequentially to each server in rotation, ensuring an equal load distribution.
+Active-Active vs. Active-Passive Setup:
+Active-Active: All servers are actively serving traffic simultaneously, sharing the load. This setup allows for better utilization of resources but requires careful synchronization of data.
+Active-Passive: In this setup, one server actively handles traffic while the other remains on standby. The passive server only becomes active if the primary server fails. This setup ensures redundancy but might underutilize resources.
+Database Primary-Replica (Master-Slave) Cluster:
+Primary-Replica Cluster: The primary (master) node accepts write operations and replicates data changes to replica (slave) nodes. Replica nodes handle read operations and remain synchronized with the primary node.
+Difference Between Primary and Replica in Regards to the Application:
+Primary Node: Handles write operations and serves as the authoritative source of data. The application interacts with the primary node for write operations.
+Replica Node: Handles read operations, providing redundancy and scalability for read-heavy tasks. The application can interact with replica nodes for faster read access but cannot perform write operations on them.
+Issues with this Infrastructure:
+Single Points of Failure (SPOF):
+Each server represents a potential single point of failure. If any server fails (web, application, or database), it could disrupt the entire website's functionality.
+Security Issues:
+Lack of Firewall: Absence of a firewall could expose the servers to potential security threats and unauthorized access.
+No HTTPS: Without HTTPS, data transmission between the servers and users is unencrypted, risking data integrity and user privacy.
+Monitoring:
+The absence of a monitoring system makes it challenging to track server performance, detect anomalies, or address issues proactively.
+To enhance this infrastructure, consider implementing measures such as firewalls, SSL/TLS (HTTPS) certificates, regular monitoring, and backups. Additionally, introducing redundancy in critical components and implementing security best practices can significantly improve reliability and security.
+
+https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Copie%20de%20Diagramme%20sans%20nom#R7Vxbc9o4FP41zOw%2B4PFFsuExhNLtTnenO9lOu08ZYQuj1ljUFoH016%2FkC9iSUkxqmwRKJgM%2BlmXpfOccnYutgXO72r1N0Hr5Fw1wNLDNYDdwpgPbtlzb4l%2BC8phTAAQ5IUxIUDQ6EO7Id1wQzYK6IQFOaw0ZpREj6zrRp3GMfVajoSSh23qzBY3qd12jECuEOx9FKvUTCdgyp45s70D%2FA5NwWd7Zcsf5mRUqGxczSZcooNsKyXkzcG4TSln%2Ba7W7xZFgXsmX%2FLrZE2f3A0twzJpcsLsl7hcfpvgunH17eDccO%2BzjsJjGA4o2xYSLwbLHkgMJ3cQBFp1YA2eyXRKG79bIF2e3HHNOW7JVVJxOWUK%2F4lsa0YRTYhrzZpMFiSKJpA6%2BmM8DThjeVUjFZN5iusIseeRNirOOWTC2kCwHFMfbA06wpC2rGI0LIipkI9z3fWAf%2F1FwUM%2FN4G41TB%2B%2F%2FDl3F947uv385Tv5Z2gd5yZZZQI3Sb9i5otRmvwApetcdhdkJzhd5eiakphlA4WTAZyK1hEJY07wOe9wIvhLY1ZojsUZNinuMSWrkE8jInMxmdRHmH9P%2F74z0oewJQhGdQhsDQIaAGBX%2FLeP87%2FOzolpOHBg35rZP%2BeufZsRxyNBMKBVo2dHhmdJjV2uRLcSMW85hhqquydmaApuE25v3qM5jj7QlDBCBbpzyhhdyZJSEYzywptCHBhd60RJkZaMAzh584BzRmRqu0RrwaDVLhRm3PBJ6lNrbGzSXMAqCjwQigdNz3lK29uQK8G4ilxZzpkFa6wI1kfBGVm4%2BPTY8%2ByhgpKM7ooEgbiN1gAfTLTZEgCObUgQaKyrq4HA6cy2useVG8fBjVjzBSMjlKbEr6PRkE84qPkEKpcaimGCI8TIQ92T0DGmuMMHoZkHEIAtg6BwN6WbxMfFddW1X%2B2qjqYndcRQEmKmdJQhtZ%2F4T4DXwM%2B4MPAs8GOON4ZO6sgGPUM3UqAbGdnf5Zo%2FYLt18EbwzMZPXYAuXX8k7%2F7Z6iP1Y%2FWsPqVLfE3IPeG8nQ4dkNa%2FnlctW43nLt%2F0ScvN6MxuX6kuTWLqHsJo9H2TYDGlEMc4QXz4sxmJcNpiTO16xtiRlh8VBMc1oKfiIFu39nBwFBzucPJw0UGQXV86NEFov6oANKrgRoLZG%2F4jZNm0c4KQ5YHIipZBu%2FttQ%2FMGPHw3zcWiSsqv3W63xoLSOUoMn67KnvhQ887qN%2BDkyk0vVgSsugiMzy0Cahx1s15HnEFZ1sg2F8IYvVA89oksMQB%2Fw43HjDBG4rAgfSFhmI3Ybgc8y6178RDaCnojt0%2F01FBKgeqkbLsGsJOY3FX%2Bbm%2BqSstpqfET0LmgiofXHu8bRFBP%2BhFrnBA%2BDKEAU34vsk7xhwOpioiiL%2Fuqj9CAAKXLgzpwWDku%2F4q07dR5yt%2FwhSd%2BH5CEj4gKPszSb9F9mi29LTodUsDrlKJaDRnGRsnEKmSe1xFiToPIqZYbpxsWkZiLc1kJNIuFsJK65n8zMYZJmKCA4MM5jQksm0%2Bf0pQanEfz%2BE%2Fk62WBqaq35JBmx8XktWWjJql9tE2BwcTsxQBRKUvdmFydHAGoEaJRV0J0QknuZav9Fs9bV%2FshOIqWaxmaJbI7pVfDvb8e7%2F55%2F0Jdmg5MLzDd8%2FqYjhrp1X3M9MLjPguOpLwT0Pgv%2FWKihn7cHlSwMH%2F7OyTx7vfLRWUoJaaAfW5MYAP%2FpFh8yyXmaPn%2BqBcRiRMT5H8NMw5XfJVF9ikXlJtyMdM6CuWas2RMPEd1Izhhz%2Fwgtgzi03hBOHZFFmAWIIb4l6DzyHJmmeZwjlLiDxc0GYoHBIaZ07EQ8HNvSXDVc4ZZIDq07JGx5rFHC0rpmbJSeqoAeJqUWHdrlVqRfj3BeAfO3tnja%2Be5VeaUoYRdUAnGgpIbXtYvTy3BeEf66bgA4zRImFwFoI7ZEqC2HOj3jejVFbJtSRehCZ4HnSwD%2Byepe4IONMjHXBZ0lvR4697jOBU6pSPQr9aBBlmQn008Pwnmq04bAzUf8akWeF2qcyeHwNBUsRj3GW6BY2mJl%2Bxt9136cqXSNSyfFTiXaw50teuWLdCLKH0Bp855R%2FNORN82rEGi4nXkwLsofXnS2uyU%2Bc8zlr5Ag2fdf5W%2BXlbpSza5OjnqtfQFGmRDXofad1H62tvgH8DVc%2B0LqNmOC699ybYXWJYKQq9OppqeuK7al2vJ7xwBjQPTKyZQzTtcW%2B0LAElPzv0oKmyQUPhV%2B2qr9uXa8osQQPNEeK%2B1r7LU8yqj8Q68vbMH2FBNjyjcv4pSiSs9su3Iuz00TdpCOZKXO%2Bo4aQsbpEyuAlHPbQlRVw71%2B0a0QSLmsioonqSM0Bw%2FDzpZBgAc9wvd1e0%2B4Dr1Ysze5ThZ6%2BSO5F06uoau7T2Ouil%2BvcDEMVQTEtdR%2FAKuHAVDS0Wj1%2FKXqzrcCv%2BfvZWQlPp1byZT4CrwVeOshhldZbclc5TtflR%2BV7dcso6dKb4rZ8re1DO2blcnHc1Tifk2TzbUEHU0T753RpA3idLRbA1R26Xm3qY0yOyV5sZbO92naIFFjLsWUoLf%2BUJOJvMw%2F6FrixJfaJ7PNgk2spefiX%2BPRMiHYqGLkwSnDa%2BOKAru5ygSF7aUfN97cvJGOefaMMpVwzEx7eF%2B2hdrOx1TeX%2FdPvfeUe5pjnfB2FfrullywGQ903VzxsoOVG6%2FTy65p%2Fndx5DjgCWPn8WBAcejkvBfRjBNuyRMd9X208fqUaUM9mNhyDnTwDF9IVIjJ5n3Knpy4sSEhjmufOrdcpnyzMqnLYHih4fNVPPmhy1pnTf%2FAw%3D%3D
