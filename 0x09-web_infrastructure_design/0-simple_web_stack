@@ -1,0 +1,25 @@
+Designing the One-Server Web Infrastructure for foobar.com:
+1. Components:
+Server: This singular machine hosts all elements.
+Web Server (Nginx): Handles HTTP requests and serves static content.
+Application Server: Executes dynamic code and interacts with the database.
+Application Files: Contains the website's codebase.
+Database (MySQL): Stores and manages website data.
+2. User Accessing the Website:
+A user wants to access the website hosted at www.foobar.com.
+3. Infrastructure Specifics Explanation:
+Server: A physical or virtual machine that provides services/resources to other computers over a network.
+Domain Name: Acts as a human-readable label (like foobar.com) linked to an IP address (like 8.8.8.8), allowing users to access the website using a memorable name.
+DNS Record for "www": This is a CNAME record type that points the subdomain "www" to the main domain "foobar.com," indicating that the website is reachable via "www.foobar.com."
+Web Server (Nginx): Its role involves handling incoming HTTP requests, managing static content (like HTML, CSS, images), and routing requests to the application server when needed.
+Application Server: Executes the dynamic code of the website, communicates with the database to retrieve or modify data, and generates content dynamically based on user requests.
+Database: Stores and manages structured data required by the website, providing the application server with access to necessary information.
+4. Communication with User's Computer:
+The server communicates with the user's computer over the HTTP protocol, responding to requests sent by the user's web browser.
+5. Issues with this Infrastructure:
+Single Point of Failure (SPOF): If any component (server, web server, application server, or database) fails, the entire website becomes inaccessible.
+Downtime during Maintenance: Performing maintenance (e.g., deploying new code, restarting the web server) can cause temporary downtime, impacting users' access to the website.
+Scalability Limitations: Inability to handle a large influx of traffic. If the traffic exceeds the server's capacity, it might lead to performance degradation or the website becoming unavailable.
+This single-server setup might encounter challenges in terms of reliability, scalability, and maintaining high availability. To address these issues, strategies like redundancy, load balancing, introducing multiple servers, or using cloud-based solutions could be considered to enhance reliability and accommodate increased traffic while minimizing downtime.
+
+https://viewer.diagrams.net/index.html?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1#R7Vpdk6I4FP01Vu0%2BSAEBlMdW292pmpnqLXdqHqciRMw2Ehtia8%2Bv3xsgCgmOdI%2FStcy21SqXkI9zzr25iRmg6ebwR4q3608sJPHANsPDAM0Gtu0jB96F4aUwuNIQpTQsTNbJsKDfSWk0S%2BuOhiSrFeSMxZxu68aAJQkJeM2G05Tt68VWLK63usUR0QyLAMe69SsN%2Bbqwju3Ryf4nodFatmx5fnFng2XhciTZGodsXzGh%2BwGapozx4tvmMCWxwE7iUjw3P3P32LGUJLzNA4cp9f4J3IwsovnT84ehj%2FiXYVnLM4535YDLzvIXiQDd5BBNskfCAzEkEy5wti3QXtEDgQYma76J4dKCr1tGE57D7k4G7kyUjmmUgCGArpIUDCuW8JJrC4CYlG3M6CaCAcR0Ce%2BbLMAEPmefF0b2HEGpsq8k5eRwFgTrCC1IkrAN4ekLFCkfQOOSjVKOkpz9iVu3NK0rtEobLtUUHSs%2BAS66XGD%2BCvzRZfzrcE5MA7kDe2rm%2F4CuPc2N%2FlgYDNeq2fMrY2QphT1Q71QxFiV9t8HqHY05m4IACh7yES9J%2FMAyyikT7C4Z52yjKqUiDPngXSkHzrZNUtLUkiNA0vtnUgAh6gJv2gqANodIxB0joFnALN%2FYZYXAaBxPWczSHENkmq45QuIxnrJHIu8kLCFX0pUArqIrC72zsNz2jq0RsCUphV4IIGfQFIRa8nAyVRnVqDoGOUF9iLO1qDC%2FyLY4oEn0t%2BB8hs74PA44fSbfQppCj5iAYZ49xd%2BAU2DnelHA9ZQo4CCdLd%2BwfZ2w0ehGhHmXCav5FdvxmCYgZTnvmWVcrcgeXnPRhQn4SEjJ6V4pfMVL8uKzc15SY%2FNiDDjj66peKlpS54T8uhx845TTJizgfeYYXIxedBBLKV1HRo55WUaO26Ch8Y00NLqsoZTtkjCnUcC1X1NOFuCZ4u4eEKtT0qiDqmiuGEAVLJHTEECdhghq%2BbcKoeO%2BhNA9WV49hNrosvY9y%2FA6jKByyVAh7NPL4q%2BPGmswav42oWtkqWFuQ8NQNNPoWSffM28zjyFZRZWEBp9Bt3IZS19P3G23MSCUzw%2FAQhF%2Be8sI8m2jngmihkywW070VBACQoUL87fPEU0Ov%2FeXleMy7weTS7ec6Nnel6zXfoFUv7DenYMW87tMJ%2BU8f3ExezEvjsWNCQ4eoxzjSva9yv%2FkrH4nM4rG1FdO%2FGvOxT7YnUDCngdhYhk0YMmKAnupEUCL9jzEHMOHsGfwaZnmcIkzGgxXLB2K5fIwT6NXQgCQ%2FwtUR2gIkiLZ0LLHxjaJriAAx3TUwOjrApC5QTf5gn9hssox6K9PqssXxxtphIwbEribeaStJ3Aa%2BiQJ78S2roAxxhnoOCcAp1w3VyhqAo%2BE2tbvRehabuekJMYiDa9V34RX2cKDWMpWswhlvjIVyDO2SwNSPnVCXa%2FIulARABcRrlWU03cc9k8wav%2FPaH3p%2BrOMOmrK3zWjLXasGxn9z1LnKM7oyHnjtdRpGvD8bqlzfjnqLKeOuLpX1Nrr1Iq8jr2uxXZ%2Bz6iz1QWDlne0Jk%2BCJVceo47Ja7G13zPyFHfREH%2Br39lOx9TpO%2BpjI39pDPZnWSD1Kskbl374Xgt1u8VCvWf%2Bo6zM3uw%2BSj1W1%2B6jr7B7z9yZcwCvp07dL%2Bl41pId%2F6VCnzLdyMNC7xX50CuOZ3VwIgt%2F36VEDCkiCUkxdH8%2BF1tkVzye5Y0MHynTj04C8gy3YadQjW7X40Ff9C76%2FkOW%2BpPJe7tC0%2BLViwXYO%2FgS8XzYhUFoeSCOhMq9de9px4oCyIS%2F1apqKp7d7%2FfGirElLrfNi5qgq0Vl9QbAXGm0txJQNg8b9uu7lUCLddSrjrfc5iSLrcDW5DpOUwqizfDXQ07PoL%2BWPwHnQaxQ9TKVmv7wIHoRpiTLSP7rktn7qR%2BWPUq%2B5TScDfavo3e4PJ37LhK20%2BF5dP8v
