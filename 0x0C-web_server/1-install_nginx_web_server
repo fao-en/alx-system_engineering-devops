@@ -1,19 +1,8 @@
 #!/usr/bin/env bash
-# Installs and configures nginx server
+# installs nginx web server
 
-# Update package list and install nginx
-apt-get update -y
+apt-get -y update
 apt-get -y install nginx
-
-# Allow Nginx through the firewall (ufw)
 ufw allow 'Nginx HTTP'
-
-# Create a simple HTML page with the string "Hello World!"
-echo "Hello World!" > /var/www/html/index.html
-
-# Start the nginx service
-service nginx start
-
-# Optionally, you can enable nginx to start on boot
-# update-rc.d nginx defaults
-
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+service nginx restart
