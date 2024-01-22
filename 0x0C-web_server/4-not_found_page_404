@@ -1,27 +1,30 @@
 #!/usr/bin/env bash
+# Configure your Nginx server to have a custom 404 page
 
-# Check if the script is run with root privileges
-if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run the script as root or using sudo."
-    exit 1
-fi
+apt-get update
+apt-get install -y nginx
 
-# Update package list and install nginx
-apt-get -y update
-apt-get -y install nginx
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+echo "Hello World!" > /etc/nginx/html/index.html
+touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-# Allow Nginx through the firewall (ufw)
-ufw allow 'Nginx HTTP'
+printf %s "server {
+    listen 80;
+    listen [::]:80 default_server;
+    root   /etc/nginx/html;
+    index  index.html index.htm;
 
-# Create a simple HTML page with the custom 404 message
-echo 'Ceci n'"'"'est pas une page' > /var/www/html/404.html
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
 
-# Add custom 404 configuration to the Nginx default site configuration
-sed -i '/listen 80 default_server;/a error_page 404 /404.html;\nlocation = /404.html {\n    root /var/www/html;\n    internal;\n}' /etc/nginx/sites-available/default
+    error_page 404 /404.html;
+    location /404 {
+      root /etc/nginx/html;
+      internal;
+    }
+}" > /etc/nginx/sites-available/default
 
-# Restart Nginx to apply the changes
 service nginx restart
-
-# Display a message indicating successful configuration
-echo "Nginx custom 404 page configured successfully."
-
